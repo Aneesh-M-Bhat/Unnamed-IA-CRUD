@@ -1,4 +1,3 @@
-import { getByTitle } from "@testing-library/react";
 import { useState } from "react";
 import AddCompany from "./components/AddCompany";
 import AddCustomer from "./components/AddCustomer";
@@ -6,6 +5,7 @@ import AddInsurance from "./components/AddInsurance";
 import AddProvided from "./components/AddProvided";
 import AddTaken from "./components/AddTaken";
 import Buttons from "./components/Buttons";
+import Table from "./components/Table";
 
 function App() {
   const [page, setPage] = useState(0);
@@ -24,50 +24,236 @@ function App() {
         return "Insurances Taken By Customers";
     }
   };
+  const updateHandler = () => {};
+  const deleteHandler = () => {};
   const getContent = () => {
     switch (page) {
       case 0:
         switch (func) {
           case 0:
-            return;
+            return (
+              <Table
+                title={"Insurance"}
+                updateHandler={updateHandler}
+                deleteHandler={deleteHandler}
+                headers={["Insurance Name", "Description", "Insurance Type"]}
+                rows={[
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                ]}
+                keys={["item"]}
+              />
+            );
           case 1:
-            return;
+            return (
+              <Table
+                title={"Insurance"}
+                updateHandler={updateHandler}
+                deleteHandler={deleteHandler}
+                headers={[
+                  "Insurance Name",
+                  "Description",
+                  "Insurance Type",
+                  "Update/Delete",
+                ]}
+                udcheck={"item"}
+                rows={[
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                ]}
+                keys={["item"]}
+              />
+            );
           case 2:
             return <AddInsurance />;
         }
       case 1:
         switch (func) {
           case 0:
-            return;
+            return (
+              <Table
+                title={"Customer"}
+                updateHandler={updateHandler}
+                deleteHandler={deleteHandler}
+                headers={["Name", "Address", "Mobile No", "Email"]}
+                rows={[
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                ]}
+                keys={["item"]}
+              />
+            );
           case 1:
-            return;
+            return (
+              <Table
+                title={"Customer"}
+                updateHandler={updateHandler}
+                deleteHandler={deleteHandler}
+                headers={[
+                  "Name",
+                  "Address",
+                  "Mobile No",
+                  "Email",
+                  "Update/Delete",
+                ]}
+                udcheck={"item"}
+                rows={[
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                ]}
+                keys={["item"]}
+              />
+            );
           case 2:
             return <AddCustomer />;
         }
       case 2:
         switch (func) {
           case 0:
-            return;
+            return (
+              <Table
+                title={"Company"}
+                updateHandler={updateHandler}
+                deleteHandler={deleteHandler}
+                headers={["Name", "Address", "Mobile No", "Email", "Net Worth"]}
+                rows={[
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                ]}
+                keys={["item"]}
+              />
+            );
           case 1:
-            return;
+            return (
+              <Table
+                title={"Company"}
+                updateHandler={updateHandler}
+                deleteHandler={deleteHandler}
+                headers={[
+                  "Name",
+                  "Address",
+                  "Mobile No",
+                  "Email",
+                  "Net Worth",
+                  "Update/Delete",
+                ]}
+                udcheck={"item"}
+                rows={[
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                ]}
+                keys={["item"]}
+              />
+            );
           case 2:
             return <AddCompany />;
         }
       case 3:
         switch (func) {
           case 0:
-            return;
+            return (
+              <Table
+                title={"Insurances Provided By Companies"}
+                updateHandler={updateHandler}
+                deleteHandler={deleteHandler}
+                headers={["Company Id", "Insurance Id"]}
+                rows={[
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                ]}
+                keys={["item"]}
+              />
+            );
           case 1:
-            return;
+            return (
+              <Table
+                title={"Insurances Provided By Companies"}
+                updateHandler={updateHandler}
+                deleteHandler={deleteHandler}
+                headers={["Company Id", "Insurance Id", "Update/Delete"]}
+                udcheck={"item"}
+                rows={[
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                ]}
+                keys={["item"]}
+              />
+            );
           case 2:
             return <AddProvided />;
         }
       case 4:
         switch (func) {
           case 0:
-            return;
+            return (
+              <Table
+                title={"Insurances Taken By Customers"}
+                updateHandler={updateHandler}
+                deleteHandler={deleteHandler}
+                headers={[
+                  "Customer Id",
+                  "Insurance Id",
+                  "Term Taken",
+                  "Price Per Month",
+                ]}
+                rows={[
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                ]}
+                keys={["item"]}
+              />
+            );
           case 1:
-            return;
+            return (
+              <Table
+                title={"Insurances Taken By Customers"}
+                updateHandler={updateHandler}
+                deleteHandler={deleteHandler}
+                headers={[
+                  "Customer Id",
+                  "Insurance Id",
+                  "Term Taken",
+                  "Price Per Month",
+                  "Update/Delete",
+                ]}
+                udcheck={"item"}
+                rows={[
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                  { item: "1" },
+                ]}
+                keys={["item"]}
+              />
+            );
           case 2:
             return <AddTaken />;
         }
@@ -138,7 +324,11 @@ function App() {
           title={getTitle()}
           style={{ height: "8vh" }}
         />
-        <div style={{ height: "85vh" }} className="w-full justify-center flex">
+
+        <div
+          style={{ height: "85vh" }}
+          className={"w-full justify-center" + (func == 2 ? " flex" : " ")}
+        >
           {getContent()}
         </div>
       </div>
