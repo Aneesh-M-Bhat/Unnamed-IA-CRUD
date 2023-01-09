@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddCompany from "./components/AddCompany";
 import AddCustomer from "./components/AddCustomer";
 import AddInsurance from "./components/AddInsurance";
@@ -6,10 +6,55 @@ import AddProvided from "./components/AddProvided";
 import AddTaken from "./components/AddTaken";
 import Buttons from "./components/Buttons";
 import Table from "./components/Table";
+import axios from "axios";
 
 function App() {
   const [page, setPage] = useState(0);
   const [func, setFunc] = useState(0);
+  const [customers, setCustomers] = useState([]);
+  const [insurances, setInsurances] = useState([]);
+  const [companies, setCompanies] = useState([]);
+  const [provided, setProvided] = useState([]);
+  const [taken, setTaken] = useState([]);
+
+  const getCustomers = async () => {
+    const response = await axios.get("http://localhost:5000/customer");
+    setCustomers(response.data);
+    console.log(response.data);
+  };
+
+  const getInsurances = async () => {
+    const response = await axios.get("http://localhost:5000/insurance");
+    setInsurances(response.data);
+    console.log(response.data);
+  };
+
+  const getCompanies = async () => {
+    const response = await axios.get("http://localhost:5000/company");
+    setCompanies(response.data);
+    console.log(response.data);
+  };
+
+  const getInsurancesProvided = async () => {
+    const response = await axios.get("http://localhost:5000/provided");
+    setProvided(response.data);
+    console.log(response.data);
+  };
+
+  const getInsurancesTaken = async () => {
+    const response = await axios.get("http://localhost:5000/taken");
+    setTaken(response.data);
+    console.log(response.data);
+  };
+
+  useEffect(() => {
+    getInsurances();
+    getCompanies();
+    getInsurancesProvided();
+    getInsurancesTaken();
+    getCustomers();
+  }, []);
+
   const getTitle = () => {
     switch (page) {
       case 0:
@@ -34,17 +79,9 @@ function App() {
             return (
               <Table
                 title={"Insurance"}
-                updateHandler={updateHandler}
-                deleteHandler={deleteHandler}
                 headers={["Insurance Name", "Description", "Insurance Type"]}
-                rows={[
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                ]}
-                keys={["item"]}
+                rows={insurances}
+                keys={["name", "description", "insuranceType"]}
               />
             );
           case 1:
@@ -59,15 +96,9 @@ function App() {
                   "Insurance Type",
                   "Update/Delete",
                 ]}
-                udcheck={"item"}
-                rows={[
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                ]}
-                keys={["item"]}
+                udcheck={"id"}
+                rows={insurances}
+                keys={["name", "description", "insuranceType"]}
               />
             );
           case 2:
@@ -79,17 +110,9 @@ function App() {
             return (
               <Table
                 title={"Customer"}
-                updateHandler={updateHandler}
-                deleteHandler={deleteHandler}
                 headers={["Name", "Address", "Mobile No", "Email"]}
-                rows={[
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                ]}
-                keys={["item"]}
+                rows={customers}
+                keys={["name", "address", "mobileNo", "emailAddress"]}
               />
             );
           case 1:
@@ -105,15 +128,9 @@ function App() {
                   "Email",
                   "Update/Delete",
                 ]}
-                udcheck={"item"}
-                rows={[
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                ]}
-                keys={["item"]}
+                udcheck={"id"}
+                rows={customers}
+                keys={["name", "address", "mobileNo", "emailAddress"]}
               />
             );
           case 2:
@@ -125,17 +142,15 @@ function App() {
             return (
               <Table
                 title={"Company"}
-                updateHandler={updateHandler}
-                deleteHandler={deleteHandler}
                 headers={["Name", "Address", "Mobile No", "Email", "Net Worth"]}
-                rows={[
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
+                rows={companies}
+                keys={[
+                  "name",
+                  "address",
+                  "mobileNo",
+                  "emailAddress",
+                  "netWorth",
                 ]}
-                keys={["item"]}
               />
             );
           case 1:
@@ -152,15 +167,15 @@ function App() {
                   "Net Worth",
                   "Update/Delete",
                 ]}
-                udcheck={"item"}
-                rows={[
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
+                udcheck={"id"}
+                rows={companies}
+                keys={[
+                  "name",
+                  "address",
+                  "mobileNo",
+                  "emailAddress",
+                  "netWorth",
                 ]}
-                keys={["item"]}
               />
             );
           case 2:
@@ -172,17 +187,9 @@ function App() {
             return (
               <Table
                 title={"Insurances Provided By Companies"}
-                updateHandler={updateHandler}
-                deleteHandler={deleteHandler}
                 headers={["Company Id", "Insurance Id"]}
-                rows={[
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                ]}
-                keys={["item"]}
+                rows={provided}
+                keys={["companyId", "insuranceId"]}
               />
             );
           case 1:
@@ -192,15 +199,9 @@ function App() {
                 updateHandler={updateHandler}
                 deleteHandler={deleteHandler}
                 headers={["Company Id", "Insurance Id", "Update/Delete"]}
-                udcheck={"item"}
-                rows={[
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                ]}
-                keys={["item"]}
+                udcheck={"id"}
+                rows={provided}
+                keys={["companyId", "insuranceId"]}
               />
             );
           case 2:
@@ -212,22 +213,19 @@ function App() {
             return (
               <Table
                 title={"Insurances Taken By Customers"}
-                updateHandler={updateHandler}
-                deleteHandler={deleteHandler}
                 headers={[
                   "Customer Id",
                   "Insurance Id",
                   "Term Taken",
                   "Price Per Month",
                 ]}
-                rows={[
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
+                rows={taken}
+                keys={[
+                  "customerId",
+                  "insuranceId",
+                  "termTaken",
+                  "pricePerMonth",
                 ]}
-                keys={["item"]}
               />
             );
           case 1:
@@ -243,15 +241,14 @@ function App() {
                   "Price Per Month",
                   "Update/Delete",
                 ]}
-                udcheck={"item"}
-                rows={[
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
-                  { item: "1" },
+                udcheck={"id"}
+                rows={taken}
+                keys={[
+                  "customerId",
+                  "insuranceId",
+                  "termTaken",
+                  "pricePerMonth",
                 ]}
-                keys={["item"]}
               />
             );
           case 2:
