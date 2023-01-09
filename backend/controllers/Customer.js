@@ -1,7 +1,7 @@
-import Customers from "../models/CustomersModel.js";
+import Customer from "../models/CustomerModel.js";
 export const getAllCustomers = async (req, res) => {
   try {
-    const customers = await Customers.findAll();
+    const customers = await Customer.findAll();
     res.json(customers);
   } catch (error) {
     res.json({ message: error.message });
@@ -10,7 +10,7 @@ export const getAllCustomers = async (req, res) => {
 
 export const getCustomerById = async (req, res) => {
   try {
-    const customer = await Customers.findAll({
+    const customer = await Customer.findAll({
       where: {
         id: req.params.id,
       },
@@ -23,7 +23,7 @@ export const getCustomerById = async (req, res) => {
 
 export const createCustomer = async (req, res) => {
   try {
-    await Customers.create(req.body);
+    await Customer.create(req.body);
     res.json({
       message: "Customer Created",
     });
@@ -34,7 +34,7 @@ export const createCustomer = async (req, res) => {
 
 export const updateCustomer = async (req, res) => {
   try {
-    await Customers.update(req.body, {
+    await Customer.update(req.body, {
       where: {
         id: req.params.id,
       },
@@ -49,7 +49,7 @@ export const updateCustomer = async (req, res) => {
 
 export const deleteCustomer = async (req, res) => {
   try {
-    await Customers.destroy({
+    await Customer.destroy({
       where: {
         id: req.params.id,
       },
