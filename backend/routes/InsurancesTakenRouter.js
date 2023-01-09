@@ -5,7 +5,7 @@ import {
   getAllInsurancesTaken,
   getInsurancesTakenById,
   updateInsurancesTaken,
-} from "../controllers/InsurancesTaken";
+} from "../controllers/InsurancesTaken.js";
 
 const InsurancesTakenRouter = express.Router();
 

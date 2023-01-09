@@ -1,4 +1,3 @@
-import express from "express";
 import db from "./config/database.js";
 import cors from "cors";
 import CustomerRouter from "./routes/CustomerRouter.js";
@@ -6,6 +5,7 @@ import InsuranceRouter from "./routes/InsuranceRouter.js";
 import InsurancesTakenRouter from "./routes/InsurancesTakenRouter.js";
 import InsuranceCompanyRouter from "./routes/InsuranceCompanyRouter.js";
 import InsurancesProvidedRouter from "./routes/InsurancesProvidedRouter.js";
+import express from "express";
 
 const app = express();
 
