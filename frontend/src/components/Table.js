@@ -11,18 +11,16 @@ export default function Table(props) {
           {props.headers.map((header) => (
             <th className="p-1">{header}</th>
           ))}
+          {props.func == 1 && <th className="p-1">Update/Delete</th>}
         </tr>
         {props.rows != null &&
           props.rows.map((row) => {
             return (
               <tr className="bg-blue-200">
-                {props.keys == null &&
-                  row.map((item) => <td className="p-1">{item}</td>)}
-                {props.keys != null &&
-                  props.keys.map((key) => (
-                    <td className="p-1">{row[key] + ""}</td>
-                  ))}
-                {props.udcheck != null && (
+                {props.keys.map((key) => (
+                  <td className="p-1">{row[key] + ""}</td>
+                ))}
+                {props.func == 1 && (
                   <td>
                     <button
                       className="bg-green-900 rounded w-1/3 mr-1 p-0.5 text-white"
