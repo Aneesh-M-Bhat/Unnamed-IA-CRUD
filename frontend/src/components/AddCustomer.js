@@ -56,7 +56,7 @@ export default function AddCustomer(props) {
         <div className="text-3xl font-bold underline text-center rounded p-1 ">
           Customer Form
         </div>
-        <label className="p-1">Enter Company Name</label>
+        <label className="p-1">Enter Customer Name</label>
         <input
           className="rounded-lg text-black p-1"
           type="text"
