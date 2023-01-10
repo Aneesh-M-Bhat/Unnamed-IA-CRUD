@@ -11,7 +11,7 @@ import axios from "axios";
 function App() {
   const [func, setFunc] = useState(0);
   const [update, setUpdate] = useState({});
-  const [url, setUrl] = useState("insurance");
+  const [url, setUrl] = useState("");
   const [tableHeader, setTableHeader] = useState([]);
   const [tableKey, setTableKey] = useState([]);
   const [data, setData] = useState([]);
@@ -35,7 +35,7 @@ function App() {
     provided: ["Company Id", "Insurance Id"],
     taken: ["Customer Id", "Insurance Id", "Term Taken", "Price Per Month"],
   };
-  
+
   const tableKeys = {
     insurance: ["id", "name", "description", "insuranceType"],
     customer: ["id", "name", "address", "mobileNo", "emailAddress"],
@@ -155,26 +155,55 @@ function App() {
         className="bg-blue-900 text-white flex flex-row p-2"
         style={{ height: "7vh" }}
       >
-        <div className=" text-xl ml-1 mr-auto">Insurance Management System</div>
+        <div className=" text-xl ml-1 mr-auto">
+          <button onClick={() => setUrl("")}>
+            Insurance Management System
+          </button>
+        </div>
         {urls.map((item, index) => (
           <div className="ml-3 py-1">
             <button onClick={() => navClickHandler(index)}>{navs[item]}</button>
           </div>
         ))}
       </div>
-      <div className="w-full bg-blue-500" style={{ height: "93vh" }}>
-        <Buttons
-          setFunc={setFunc}
-          title={navs[url]}
-          style={{ height: "8vh" }}
-        />
-        <div
-          style={{ height: "85vh" }}
-          className={"w-full justify-center" + (func == 2 ? " flex" : " ")}
-        >
-          {getContent()}
+      {url != "" && (
+        <div className="w-full bg-blue-500" style={{ height: "93vh" }}>
+          <Buttons
+            setFunc={setFunc}
+            title={navs[url]}
+            style={{ height: "8vh" }}
+          />
+          <div
+            style={{ height: "85vh" }}
+            className={"w-full justify-center" + (func == 2 ? " flex" : " ")}
+          >
+            {getContent()}
+          </div>
         </div>
-      </div>
+      )}
+      {url == "" && (
+        <div
+          className="w-full bg-blue-500 flex flex-col justify-center text-center"
+          style={{ height: "93vh" }}
+        >
+          <div className=" text-9xl font-bold">Welcome </div>
+          <div className="absolute right-10 bottom-10 bg-blue-900 rounded p-2">
+            <div className=" text-left font-bold text-2xl underline">
+              Project By,{" "}
+            </div>
+            <table className=" text-left text-white text-xl">
+              <tr>
+                <td className="pl-5">Isha </td>
+                <td className="pl-5">4JK20CS420</td>
+              </tr>
+              <tr>
+                <td className="pl-5">Anvitha </td>
+                <td className="pl-5"> 4JK20CS420</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
