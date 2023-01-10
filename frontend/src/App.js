@@ -193,12 +193,12 @@ function App() {
             </div>
             <table className=" text-left text-white text-xl">
               <tr>
-                <td className="pl-5">Isha </td>
-                <td className="pl-5">4JK20CS420</td>
+                <td className="pl-5">I </td>
+                <td className="pl-5">4</td>
               </tr>
               <tr>
-                <td className="pl-5">Anvitha </td>
-                <td className="pl-5"> 4JK20CS420</td>
+                <td className="pl-5">A </td>
+                <td className="pl-5"> 4</td>
               </tr>
             </table>
           </div>
