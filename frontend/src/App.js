@@ -186,19 +186,24 @@ function App() {
           className="w-full bg-blue-500 flex flex-col justify-center text-center"
           style={{ height: "93vh" }}
         >
-          <div className=" text-9xl font-bold">Welcome </div>
+          <div className=" text-9xl font-bold">
+            Welcome
+            <div className="text-5xl font-extralight">
+              Insurance Management System
+            </div>
+          </div>
           <div className="absolute right-10 bottom-10 bg-blue-900 rounded p-2">
             <div className=" text-left font-bold text-2xl underline">
               Project By,{" "}
             </div>
             <table className=" text-left text-white text-xl">
               <tr>
-                <td className="pl-5">I </td>
-                <td className="pl-5">4</td>
+                <td className="pl-5">Name1 </td>
+                <td className="pl-5">USN1</td>
               </tr>
               <tr>
-                <td className="pl-5">A </td>
-                <td className="pl-5"> 4</td>
+                <td className="pl-5">Name2 </td>
+                <td className="pl-5"> USN2</td>
               </tr>
             </table>
           </div>
