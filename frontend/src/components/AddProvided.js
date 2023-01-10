@@ -18,7 +18,7 @@ export default function AddProvided(props) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (props.update == {}) {
+    if (props.update.id == null) {
       await axios.post("http://localhost:5000/provided", {
         companyId: companyId,
         insuranceId: insuranceId,
@@ -28,8 +28,8 @@ export default function AddProvided(props) {
         companyId: companyId,
         insuranceId: insuranceId,
       });
-      props.setUpdate({});
     }
+    props.setUpdate({});
     resetHandler();
     props.getData();
     props.setFunc(0);

@@ -20,23 +20,22 @@ export default function AddInsurance(props) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if ((props.update = {})) {
+    console.log("here");
+    if (props.update.id == null) {
+      console.log("here");
       await axios.post("http://localhost:5000/insurance", {
         name: name,
         description: desc,
         insuranceType: type,
       });
-      resetHandler();
-      props.getData();
-      props.setFunc(0);
     } else {
       await axios.patch(`http://localhost:5000/insurance/${props.update.id}`, {
         name: name,
         description: desc,
         insuranceType: type,
       });
-      props.setUpdate({});
     }
+    props.setUpdate({});
     resetHandler();
     props.getData();
     props.setFunc(0);

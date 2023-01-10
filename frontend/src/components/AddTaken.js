@@ -15,15 +15,15 @@ export default function AddTaken(props) {
     if (props.update != {}) {
       setCustomerId(props.update.customerId);
       setInsuranceId(props.update.insuranceId);
-      setTerm(props.update.term);
-      setPrice(props.update.price);
+      setTerm(props.update.termTaken);
+      setPrice(props.update.pricePerMonth);
     }
   };
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (props.update == {}) {
+    if (props.update.id == null) {
       await axios.post("http://localhost:5000/taken", {
         customerId: customerId,
         insuranceId: insuranceId,
@@ -37,8 +37,8 @@ export default function AddTaken(props) {
         termTaken: term,
         pricePerMonth: price,
       });
-      props.setUpdate({});
     }
+    props.setUpdate({});
     resetHandler();
     props.getData();
     props.setFunc(0);

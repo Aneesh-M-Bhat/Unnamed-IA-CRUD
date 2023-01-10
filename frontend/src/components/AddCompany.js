@@ -24,7 +24,7 @@ export default function AddCompany(props) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (props.update == {}) {
+    if (props.update.id == null) {
       await axios.post("http://localhost:5000/company", {
         name: name,
         address: addr,
@@ -40,8 +40,8 @@ export default function AddCompany(props) {
         emailAddress: ema,
         netWorth: net,
       });
-      props.setUpdate({});
     }
+    props.setUpdate({});
     resetHandler();
     props.getData();
     props.setFunc(0);

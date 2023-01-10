@@ -22,7 +22,7 @@ export default function AddCustomer(props) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (props.update == {}) {
+    if (props.update.id == null) {
       await axios.post("http://localhost:5000/customer", {
         name: name,
         address: addr,
@@ -36,8 +36,8 @@ export default function AddCustomer(props) {
         mobileNo: mob,
         emailAddress: ema,
       });
-      props.setUpdate({});
     }
+    props.setUpdate({});
     resetHandler();
     props.getData();
     props.setFunc(0);
