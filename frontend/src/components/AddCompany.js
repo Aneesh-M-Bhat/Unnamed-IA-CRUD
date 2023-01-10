@@ -1,48 +1,68 @@
+import axios from "axios";
 import { useState } from "react";
 
-export default function AddCompany() {
+export default function AddCompany(props) {
   const [name, setName] = useState("");
   const [addr, setAddr] = useState("");
   const [mob, setMob] = useState("");
   const [ema, setEma] = useState("");
   const [net, setNet] = useState("");
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:5000/company", {
+      name: name,
+      address: addr,
+      mobileNo: mob,
+      emailAddress: ema,
+      netWorth: net,
+    });
+    setName("");
+    setAddr("");
+    setEma("");
+    setMob("");
+    setNet("");
+    props.getData();
+    props.setFunc(0);
+  };
+
   return (
-    <form className="w-1/2 flex" onSubmit={(e) => e.preventDefault()}>
+    <form className="w-1/2 flex" onSubmit={(e) => submitHandler(e)}>
       <div className="bg-blue-900 flex flex-col my-auto w-full rounded p-2 text-white">
         <div className="text-3xl font-bold underline text-center rounded p-1 ">
           Insurance Company Form
         </div>
         <label className="p-1">Enter Company Name</label>
         <input
-          className="rounded-lg"
+          className="rounded-lg text-black p-1"
           type="text"
           onChange={(e) => setName(e.target.value)}
           value={name}
         />
         <label className="p-1">Enter Address</label>
         <input
-          className="rounded-lg"
+          className="rounded-lg text-black p-1"
           type="text"
           onChange={(e) => setAddr(e.target.value)}
           value={addr}
         />
         <label className="p-1">Enter Mobile Number</label>
         <input
-          className="rounded-lg"
+          className="rounded-lg text-black p-1"
           type="text"
           onChange={(e) => setMob(e.target.value)}
           value={mob}
         />
         <label className="p-1">Enter Email Address</label>
         <input
-          className="rounded-lg"
+          className="rounded-lg text-black p-1"
           type="text"
           onChange={(e) => setEma(e.target.value)}
           value={ema}
         />
         <label className="p-1">Enter Net Worth</label>
         <input
-          className="rounded-lg"
+          className="rounded-lg text-black p-1"
           type="text"
           onChange={(e) => setNet(e.target.value)}
           value={net}

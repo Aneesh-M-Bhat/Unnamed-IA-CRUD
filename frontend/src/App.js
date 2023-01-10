@@ -102,7 +102,7 @@ function App() {
               />
             );
           case 2:
-            return <AddInsurance />;
+            return <AddInsurance getData={getInsurances} setFunc={setFunc} />;
         }
       case 1:
         switch (func) {
@@ -134,7 +134,7 @@ function App() {
               />
             );
           case 2:
-            return <AddCustomer />;
+            return <AddCustomer getData={getCustomers} setFunc={setFunc} />;
         }
       case 2:
         switch (func) {
@@ -179,7 +179,7 @@ function App() {
               />
             );
           case 2:
-            return <AddCompany />;
+            return <AddCompany getData={getCompanies} setFunc={setFunc} />;
         }
       case 3:
         switch (func) {
@@ -205,7 +205,9 @@ function App() {
               />
             );
           case 2:
-            return <AddProvided />;
+            return (
+              <AddProvided getData={getInsurancesProvided} setFunc={setFunc} />
+            );
         }
       case 4:
         switch (func) {
@@ -252,7 +254,7 @@ function App() {
               />
             );
           case 2:
-            return <AddTaken />;
+            return <AddTaken getData={getInsurancesTaken} setFunc={setFunc} />;
         }
     }
   };

@@ -1,24 +1,38 @@
+import axios from "axios";
 import { useState } from "react";
 
-export default function AddProvided() {
+export default function AddProvided(props) {
   const [companyId, setCompanyId] = useState("");
   const [insuranceId, setInsuranceId] = useState("");
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:5000/provided", {
+      companyId: companyId,
+      insuranceId: insuranceId,
+    });
+    setCompanyId("");
+    setInsuranceId("");
+    props.getData();
+    props.setFunc(0);
+  };
+
   return (
-    <form className="w-1/2 flex" onSubmit={(e) => e.preventDefault()}>
+    <form className="w-1/2 flex" onSubmit={(e) => submitHandler(e)}>
       <div className="bg-blue-900 flex flex-col my-auto w-full rounded p-2 text-white">
         <div className="text-3xl font-bold underline text-center rounded p-1 ">
           Insurances Provided By Companies Form
         </div>
         <label className="p-1">Enter Company Id</label>
         <input
-          className="rounded-lg"
+          className="rounded-lg text-black p-1"
           type="number"
           onChange={(e) => setCompanyId(e.target.value)}
           value={companyId}
         />
         <label className="p-1">Enter Insurance id</label>
         <input
-          className="rounded-lg"
+          className="rounded-lg text-black p-1"
           type="number"
           onChange={(e) => setInsuranceId(e.target.value)}
           value={insuranceId}
