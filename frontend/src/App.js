@@ -16,6 +16,7 @@ function App() {
   const [companies, setCompanies] = useState([]);
   const [provided, setProvided] = useState([]);
   const [taken, setTaken] = useState([]);
+  const [update, setUpdate] = useState({});
 
   const getCustomers = async () => {
     const response = await axios.get("http://localhost:5000/customer");
@@ -69,8 +70,36 @@ function App() {
         return "Insurances Taken By Customers";
     }
   };
-  const updateHandler = () => {};
-  const deleteHandler = () => {};
+  const updateHandler = (data) => {
+    setUpdate(data);
+    setFunc(2);
+  };
+  const deleteHandler = async (id) => {
+    let url;
+    switch (page) {
+      case 0:
+        url = "insurance";
+        break;
+      case 1:
+        url = "customer";
+        break;
+      case 2:
+        url = "company";
+        break;
+      case 3:
+        url = "provided";
+        break;
+      case 4:
+        url = "taken";
+        break;
+    }
+    await axios.delete(`http://localhost:5000/${url}/${id}`);
+    getInsurances();
+    getCompanies();
+    getInsurancesProvided();
+    getInsurancesTaken();
+    getCustomers();
+  };
   const getContent = () => {
     switch (page) {
       case 0:
@@ -108,7 +137,14 @@ function App() {
               />
             );
           case 2:
-            return <AddInsurance getData={getInsurances} setFunc={setFunc} />;
+            return (
+              <AddInsurance
+                getData={getInsurances}
+                setFunc={setFunc}
+                update={update}
+                setUpdate={setUpdate}
+              />
+            );
         }
       case 1:
         switch (func) {
@@ -147,7 +183,14 @@ function App() {
               />
             );
           case 2:
-            return <AddCustomer getData={getCustomers} setFunc={setFunc} />;
+            return (
+              <AddCustomer
+                getData={getCustomers}
+                setFunc={setFunc}
+                update={update}
+                setUpdate={setUpdate}
+              />
+            );
         }
       case 2:
         switch (func) {
@@ -202,7 +245,14 @@ function App() {
               />
             );
           case 2:
-            return <AddCompany getData={getCompanies} setFunc={setFunc} />;
+            return (
+              <AddCompany
+                getData={getCompanies}
+                setFunc={setFunc}
+                update={update}
+                setUpdate={setUpdate}
+              />
+            );
         }
       case 3:
         switch (func) {
@@ -229,7 +279,12 @@ function App() {
             );
           case 2:
             return (
-              <AddProvided getData={getInsurancesProvided} setFunc={setFunc} />
+              <AddProvided
+                getData={getInsurancesProvided}
+                setFunc={setFunc}
+                update={update}
+                setUpdate={setUpdate}
+              />
             );
         }
       case 4:
@@ -277,7 +332,14 @@ function App() {
               />
             );
           case 2:
-            return <AddTaken getData={getInsurancesTaken} setFunc={setFunc} />;
+            return (
+              <AddTaken
+                getData={getInsurancesTaken}
+                setFunc={setFunc}
+                update={update}
+                setUpdate={setUpdate}
+              />
+            );
         }
     }
   };

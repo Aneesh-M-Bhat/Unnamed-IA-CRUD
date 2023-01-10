@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AddTaken(props) {
   const [customerId, setCustomerId] = useState("");
@@ -7,14 +7,38 @@ export default function AddTaken(props) {
   const [term, setTerm] = useState("");
   const [price, setPrice] = useState("");
 
+  useEffect(() => {
+    loadUpdate();
+  }, []);
+
+  const loadUpdate = () => {
+    if (props.update != {}) {
+      setCustomerId(props.update.customerId);
+      setInsuranceId(props.update.insuranceId);
+      setTerm(props.update.term);
+      setPrice(props.update.price);
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:5000/taken", {
-      customerId: customerId,
-      insuranceId: insuranceId,
-      termTaken: term,
-      pricePerMonth: price,
-    });
+
+    if (props.update == {}) {
+      await axios.post("http://localhost:5000/taken", {
+        customerId: customerId,
+        insuranceId: insuranceId,
+        termTaken: term,
+        pricePerMonth: price,
+      });
+    } else {
+      await axios.patch(`http://localhost:5000/taken/${props.update.id}`, {
+        customerId: customerId,
+        insuranceId: insuranceId,
+        termTaken: term,
+        pricePerMonth: price,
+      });
+      props.setUpdate({});
+    }
     resetHandler();
     props.getData();
     props.setFunc(0);
@@ -65,7 +89,11 @@ export default function AddTaken(props) {
           <button type="submit" className="bg-green-900 w-1/3 p-1 rounded mr-1">
             Submit
           </button>
-          <button type="reset" onClick={resetHandler} className="bg-red-900 w-1/3 p-1 rounded ml-1">
+          <button
+            type="reset"
+            onClick={resetHandler}
+            className="bg-red-900 w-1/3 p-1 rounded ml-1"
+          >
             Reset
           </button>
         </div>

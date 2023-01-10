@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AddCompany(props) {
   const [name, setName] = useState("");
@@ -8,15 +8,40 @@ export default function AddCompany(props) {
   const [ema, setEma] = useState("");
   const [net, setNet] = useState("");
 
+  useEffect(() => {
+    loadUpdate();
+  }, []);
+
+  const loadUpdate = () => {
+    if (props.update != {}) {
+      setName(props.update.name);
+      setMob(props.update.mobileNo);
+      setAddr(props.update.address);
+      setEma(props.update.emailAddress);
+      setNet(props.update.netWorth);
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:5000/company", {
-      name: name,
-      address: addr,
-      mobileNo: mob,
-      emailAddress: ema,
-      netWorth: net,
-    });
+    if (props.update == {}) {
+      await axios.post("http://localhost:5000/company", {
+        name: name,
+        address: addr,
+        mobileNo: mob,
+        emailAddress: ema,
+        netWorth: net,
+      });
+    } else {
+      await axios.patch(`http://localhost:5000/company/${props.update.id}`, {
+        name: name,
+        address: addr,
+        mobileNo: mob,
+        emailAddress: ema,
+        netWorth: net,
+      });
+      props.setUpdate({});
+    }
     resetHandler();
     props.getData();
     props.setFunc(0);

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AddCustomer(props) {
   const [name, setName] = useState("");
@@ -7,14 +7,37 @@ export default function AddCustomer(props) {
   const [mob, setMob] = useState("");
   const [ema, setEma] = useState("");
 
+  useEffect(() => {
+    loadUpdate();
+  }, []);
+
+  const loadUpdate = () => {
+    if (props.update != {}) {
+      setName(props.update.name);
+      setMob(props.update.mobileNo);
+      setAddr(props.update.address);
+      setEma(props.update.emailAddress);
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:5000/customer", {
-      name: name,
-      address: addr,
-      mobileNo: mob,
-      emailAddress: ema,
-    });
+    if (props.update == {}) {
+      await axios.post("http://localhost:5000/customer", {
+        name: name,
+        address: addr,
+        mobileNo: mob,
+        emailAddress: ema,
+      });
+    } else {
+      await axios.patch(`http://localhost:5000/customer/${props.update.id}`, {
+        name: name,
+        address: addr,
+        mobileNo: mob,
+        emailAddress: ema,
+      });
+      props.setUpdate({});
+    }
     resetHandler();
     props.getData();
     props.setFunc(0);

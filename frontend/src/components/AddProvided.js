@@ -1,16 +1,35 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AddProvided(props) {
   const [companyId, setCompanyId] = useState("");
   const [insuranceId, setInsuranceId] = useState("");
 
+  useEffect(() => {
+    loadUpdate();
+  }, []);
+
+  const loadUpdate = () => {
+    if (props.update != {}) {
+      setCompanyId(props.update.companyId);
+      setInsuranceId(props.update.insuranceId);
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:5000/provided", {
-      companyId: companyId,
-      insuranceId: insuranceId,
-    });
+    if (props.update == {}) {
+      await axios.post("http://localhost:5000/provided", {
+        companyId: companyId,
+        insuranceId: insuranceId,
+      });
+    } else {
+      await axios.patch(`http://localhost:5000/provided/${props.update.id}`, {
+        companyId: companyId,
+        insuranceId: insuranceId,
+      });
+      props.setUpdate({});
+    }
     resetHandler();
     props.getData();
     props.setFunc(0);
