@@ -35,6 +35,7 @@ function App() {
     provided: ["Company Id", "Insurance Id"],
     taken: ["Customer Id", "Insurance Id", "Term Taken", "Price Per Month"],
   };
+  
   const tableKeys = {
     insurance: ["id", "name", "description", "insuranceType"],
     customer: ["id", "name", "address", "mobileNo", "emailAddress"],
@@ -54,7 +55,7 @@ function App() {
   const urls = ["insurance", "customer", "company", "provided", "taken"];
 
   useEffect(() => {
-    getData(urls[0]);
+    getData("insurance");
   }, []);
 
   const updateHandler = (data) => {
@@ -64,10 +65,10 @@ function App() {
 
   const deleteHandler = async (id) => {
     await axios.delete(`http://localhost:5000/${url}/${id}`);
-    getData();
+    getData(url);
   };
 
-  const getData = async (url = url) => {
+  const getData = async (url) => {
     const response = await axios.get(`http://localhost:5000/${url}`);
     setData(response.data);
   };
@@ -91,7 +92,7 @@ function App() {
       case "insurance":
         return (
           <AddInsurance
-            getData={getData}
+            getData={() => getData(url)}
             setFunc={setFunc}
             update={update}
             setUpdate={setUpdate}
@@ -101,7 +102,7 @@ function App() {
       case "customer":
         return (
           <AddCustomer
-            getData={getData}
+            getData={() => getData(url)}
             setFunc={setFunc}
             update={update}
             setUpdate={setUpdate}
@@ -111,7 +112,7 @@ function App() {
       case "company":
         return (
           <AddCompany
-            getData={getData}
+            getData={() => getData(url)}
             setFunc={setFunc}
             update={update}
             setUpdate={setUpdate}
@@ -121,7 +122,7 @@ function App() {
       case "provided":
         return (
           <AddProvided
-            getData={getData}
+            getData={() => getData(url)}
             setFunc={setFunc}
             update={update}
             setUpdate={setUpdate}
@@ -131,7 +132,7 @@ function App() {
       case "taken":
         return (
           <AddTaken
-            getData={getData}
+            getData={() => getData(url)}
             setFunc={setFunc}
             update={update}
             setUpdate={setUpdate}
