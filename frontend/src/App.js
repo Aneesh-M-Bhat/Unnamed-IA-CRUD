@@ -79,9 +79,14 @@ function App() {
             return (
               <Table
                 title={"Insurance"}
-                headers={["Insurance Name", "Description", "Insurance Type"]}
+                headers={[
+                  "Insurance Id",
+                  "Insurance Name",
+                  "Description",
+                  "Insurance Type",
+                ]}
                 rows={insurances}
-                keys={["name", "description", "insuranceType"]}
+                keys={["id", "name", "description", "insuranceType"]}
               />
             );
           case 1:
@@ -91,6 +96,7 @@ function App() {
                 updateHandler={updateHandler}
                 deleteHandler={deleteHandler}
                 headers={[
+                  "Insurance Id",
                   "Insurance Name",
                   "Description",
                   "Insurance Type",
@@ -98,7 +104,7 @@ function App() {
                 ]}
                 udcheck={"id"}
                 rows={insurances}
-                keys={["name", "description", "insuranceType"]}
+                keys={["id", "name", "description", "insuranceType"]}
               />
             );
           case 2:
@@ -110,9 +116,15 @@ function App() {
             return (
               <Table
                 title={"Customer"}
-                headers={["Name", "Address", "Mobile No", "Email"]}
+                headers={[
+                  "Customer Id",
+                  "Name",
+                  "Address",
+                  "Mobile No",
+                  "Email",
+                ]}
                 rows={customers}
-                keys={["name", "address", "mobileNo", "emailAddress"]}
+                keys={["id", "name", "address", "mobileNo", "emailAddress"]}
               />
             );
           case 1:
@@ -122,6 +134,7 @@ function App() {
                 updateHandler={updateHandler}
                 deleteHandler={deleteHandler}
                 headers={[
+                  "Customer Id",
                   "Name",
                   "Address",
                   "Mobile No",
@@ -130,7 +143,7 @@ function App() {
                 ]}
                 udcheck={"id"}
                 rows={customers}
-                keys={["name", "address", "mobileNo", "emailAddress"]}
+                keys={["id", "name", "address", "mobileNo", "emailAddress"]}
               />
             );
           case 2:
@@ -142,9 +155,17 @@ function App() {
             return (
               <Table
                 title={"Company"}
-                headers={["Name", "Address", "Mobile No", "Email", "Net Worth"]}
+                headers={[
+                  "Company Id",
+                  "Name",
+                  "Address",
+                  "Mobile No",
+                  "Email",
+                  "Net Worth",
+                ]}
                 rows={companies}
                 keys={[
+                  "id",
                   "name",
                   "address",
                   "mobileNo",
@@ -160,6 +181,7 @@ function App() {
                 updateHandler={updateHandler}
                 deleteHandler={deleteHandler}
                 headers={[
+                  "Company Id",
                   "Name",
                   "Address",
                   "Mobile No",
@@ -170,6 +192,7 @@ function App() {
                 udcheck={"id"}
                 rows={companies}
                 keys={[
+                  "id",
                   "name",
                   "address",
                   "mobileNo",

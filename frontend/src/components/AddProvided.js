@@ -11,10 +11,14 @@ export default function AddProvided(props) {
       companyId: companyId,
       insuranceId: insuranceId,
     });
-    setCompanyId("");
-    setInsuranceId("");
+    resetHandler();
     props.getData();
     props.setFunc(0);
+  };
+
+  const resetHandler = () => {
+    setCompanyId("");
+    setInsuranceId("");
   };
 
   return (
@@ -41,7 +45,11 @@ export default function AddProvided(props) {
           <button type="submit" className="bg-green-900 w-1/3 p-1 rounded mr-1">
             Submit
           </button>
-          <button type="reset" className="bg-red-900 w-1/3 p-1 rounded ml-1">
+          <button
+            type="reset"
+            onClick={resetHandler}
+            className="bg-red-900 w-1/3 p-1 rounded ml-1"
+          >
             Reset
           </button>
         </div>

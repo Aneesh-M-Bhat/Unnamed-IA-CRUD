@@ -17,13 +17,17 @@ export default function AddCompany(props) {
       emailAddress: ema,
       netWorth: net,
     });
+    resetHandler();
+    props.getData();
+    props.setFunc(0);
+  };
+
+  const resetHandler = () => {
     setName("");
     setAddr("");
     setEma("");
     setMob("");
     setNet("");
-    props.getData();
-    props.setFunc(0);
   };
 
   return (
@@ -71,7 +75,11 @@ export default function AddCompany(props) {
           <button type="submit" className="bg-green-900 w-1/3 p-1 rounded mr-1">
             Submit
           </button>
-          <button type="reset" className="bg-red-900 w-1/3 p-1 rounded ml-1">
+          <button
+            type="reset"
+            onClick={resetHandler}
+            className="bg-red-900 w-1/3 p-1 rounded ml-1"
+          >
             Reset
           </button>
         </div>
